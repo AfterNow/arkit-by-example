@@ -33,7 +33,8 @@
   self.arConfig = [ARWorldTrackingSessionConfiguration new];
   self.arConfig.lightEstimationEnabled = YES;
   self.arConfig.planeDetection = ARPlaneDetectionHorizontal;
-  
+  self.arConfig.worldAlignment = ARWorldAlignmentGravityAndHeading;
+
   Config *config = [Config new];
   config.showStatistics = NO;
   config.showWorldOrigin = YES;

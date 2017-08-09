@@ -53,7 +53,7 @@
   [self.navigationController setNavigationBarHidden:YES animated:NO];
   
   // Run the view's session
-  [self.sceneView.session runWithConfiguration: self.arConfig options: 0];
+  [self.sceneView.session runWithConfiguration: self.arConfig];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -351,16 +351,6 @@
   }
 }
 
-- (void)refresh {
-  for (NSUUID *planeId in self.planes) {
-    [self.planes[planeId] remove];
-  }
-  for (Cube *cube in self.cubes) {
-    [cube remove];
-  }
-  [self.sceneView.session runWithConfiguration:self.arConfig options:ARSessionRunOptionResetTracking | ARSessionRunOptionRemoveExistingAnchors];
-}
-
 #pragma mark - SCNPhysicsContactDelegate
 
 - (void)physicsWorld:(SCNPhysicsWorld *)world didBeginContact:(SCNPhysicsContact *)contact {
@@ -524,7 +514,6 @@
 - (void)sessionInterruptionEnded:(ARSession *)session {
   // Reset tracking and/or remove existing anchors if consistent tracking is required
   [self showMessage:@"Tracking session has been reset due to interruption"];
-  [self refresh];
 }
 
 @end
